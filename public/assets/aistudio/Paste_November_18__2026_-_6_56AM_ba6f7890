@@ -1,0 +1,545 @@
+IMPORTANT PROJECT CONTEXT — READ BEFORE MAKING CHANGES
+I have just imported the existing Remake project from GitHub into this Google AI Studio project.
+
+I have NOT pasted or run any of the earlier master implementation prompts in this project. Therefore:
+- Do not assume any of the previously discussed improvements have already been implemented.
+- Do not assume a previous prompt, plan, checklist or generated implementation exists in this project.
+- Do not claim that requested changes are already complete unless you inspect the actual imported source code and verify them.
+- Treat the currently imported GitHub repository as the baseline and source of truth.
+- Do not ask me to upload the ZIP again. The project is already imported from GitHub.
+- First inspect the current code, determine what genuinely exists and works, then implement the requirements in this brief.
+- Preserve all working features and the current visual design.
+- Make the changes in this imported project, not in a newly generated replacement application.
+The earlier discussions describe the desired Remake functionality, not work that has already been applied to this imported project. Your job is to implement that functionality now, based on the real state of the repository.
+REMAKE --- STRICT EXISTING-PROJECT CONTINUATION FOR GOOGLE AI STUDIO
+Frontend first · New Firebase backend second · Performance and integrity are mandatory
+You are working inside the existing Google AI Studio project named
+loop-and-lift-rewards. The current project already contains Remake's
+frontend and portions of its previous Lovable/Supabase implementation.
+
+Continue this exact project. Do not create a new app, replace it with
+a generic template, or discard the existing frontend.
+
+The goal is to complete Remake, preserve its current visual identity and
+existing Google Maps implementation, improve performance, and replace
+the old Lovable-specific backend dependencies with a properly designed
+Firebase backend.
+A. NON-NEGOTIABLE RULES
+A1. Preserve the current frontend exactly unless a requested change requires otherwise
+The current frontend is the design reference and source of truth.
+- Preserve the existing typography, font families, font sizes, font
+  weights, colours, spacing, border radii, shadows, buttons, cards,
+  sidebar, navigation and page layouts.
+- Reuse existing components, CSS, Tailwind configuration, design
+  tokens and layout patterns.
+- Do not invent a new design system or randomly change typography.
+- Do not add decorative copy, slogans, helper paragraphs, badges,
+  banners, side notes, side panels, floating cards or extra sections
+  unless essential to a requested workflow.
+- Do not fill empty space with invented content.
+- Do not replace existing pages with generic dashboard templates.
+- Do not redesign pages that already work.
+- Do not add a screen merely to make a menu item appear functional.
+- Do not remove working functionality while implementing requested
+  changes.
+- Keep labels short and useful. Avoid redundant explanations.
+- If a feature fails, show a concise honest status in its existing
+  area, such as Not available, Could not load, or
+  Location permission denied.
+Before editing, inspect the actual running project and its source files.
+Identify the current design tokens and shared components, then reuse
+them.
+A2. Existing maps only --- no invented maps
+The existing application already has a Google Maps implementation.
+Preserve and reuse it.
+- Do not replace it with another map library.
+- Do not generate a static map image or decorative map.
+- Do not invent roads, streets, addresses, map pins, routes, GPS
+  coordinates or collector positions.
+- Do not simulate a moving collector.
+- Do not add a second map implementation.
+- Do not change map provider or configuration without proving it is
+  necessary.
+- If the existing Google Maps key is unavailable, keep the existing
+  map component and show a concise unavailable/configuration status.
+  Do not substitute a fake map.
+- Only display actual device coordinates, saved addresses, real routes
+  and authorised recent location updates.
+The GOOGLE_MAPS_API_KEY is a separate Google Maps credential. Do not
+fabricate it. If it is unavailable, report exactly where it is required
+and continue other work.
+A3. No fake functionality or data
+Never fabricate: - AI scan results. - User, pickup, institution or
+collector records. - Analytics, material weights or financial figures. -
+GPS locations, addresses or routes. - QR verification success. - Pickup
+assignments or completed collections. - Processor verification. - Green
+Coins balances or transactions.
+
+Do not use hardcoded demo data as production data. Development fixtures
+must be clearly isolated and must never be presented as real operational
+records.
+
+A visible button does not mean a feature is implemented. Report what
+actually works and what does not.
+A4. Preserve the current codebase
+- Keep the existing React/TypeScript project and folder structure
+  wherever practical.
+- Inspect before editing.
+- Make targeted changes rather than replacing large files
+  unnecessarily.
+- Preserve working routes, components and interactions.
+- Remove Lovable-specific dependencies only after replacing their
+  functionality.
+- Do not leave imports, environment variables or dead code referring
+  to removed services.
+- Do not expose secrets in browser code.
+- Do not claim completion without running checks.
+B. REQUIRED IMPLEMENTATION ORDER
+Work in two stages:
+1. Stage 1 --- complete and verify the frontend.
+2. Stage 2 --- build and integrate the new Firebase backend.
+You may inspect the old backend during Stage 1 to understand existing
+data contracts, but do not modify database schema, backend business
+logic or security rules until Stage 1 is complete.
+
+Do not stop after writing a plan. Implement the work in the current
+project. Once Stage 1 checks are complete, continue to Stage 2
+automatically unless a genuine blocker requires a decision.
+STAGE 1 --- FRONTEND FIRST
+1. Audit the existing application
+Inspect: - Project structure and package configuration. - All existing
+routes and role workspaces. - Shared components and design tokens. -
+Current resident, business, collector, hub, processor, institution and
+admin experiences. - Existing Google Maps components and
+configuration. - Waste scanner and image upload. - Pickup booking and
+history. - Recycling Guide. - QR scan and collection screens. - Green
+Coins and rewards. - Existing loading states, network requests and
+navigation behaviour.
+
+Create a concise internal checklist and begin implementation. Do not
+spend the available time producing a long audit instead of making
+changes.
+2. Waste scanner
+Complete the existing scanner without redesigning it unnecessarily.
+- Take a real photo using the device camera where supported.
+- Upload a real image from the device.
+- Preview the exact selected image.
+- Retake, replace and remove the image.
+- Validate file type and size.
+- Call the real scan service when available.
+- Support multiple detected material categories.
+- Let the resident confirm or correct the detected categories.
+- Save scan history when connected.
+Categories can include general plastics, PET bottles, HDPE, metals,
+aluminium cans, glass, paper, cardboard, e-waste and organic waste.
+
+Show only useful information: material, confidence if actually returned,
+and a short explanation if needed.
+
+AI image analysis must not claim exact weight, guaranteed acceptance or
+guaranteed recycling value.
+
+If the AI service fails, show Analysis unavailable. Try again. Do not
+invent results.
+3. Four-step pickup booking
+Reorganise the existing booking form into four compact steps while
+preserving existing booking capabilities and styling.
+
+Step 1 --- Materials - Select waste categories. - Support multiple
+materials only as separate streams. - Briefly explain that different
+materials must be physically separated. - Allow use of the scanner.
+
+Step 2 --- Photo and confirmation - Take or upload a real photo. -
+Preview, replace or retake it. - Run real analysis. - Confirm or correct
+detected materials.
+
+Step 3 --- Date, time and location - Select date and available
+time. - Reuse the existing Google Maps component. - Provide
+Use My Current Location. - Allow manual address entry and pin
+adjustment where supported.
+
+Step 4 --- Review and confirm - Show a compact summary of materials,
+date, time and location. - Confirm through the connected booking
+service.
+
+Preserve data when navigating backwards, validate required fields and
+prevent duplicate submissions. Do not add long instructional paragraphs
+or extra panels.
+4. GPS and saved addresses
+- Request actual device geolocation permission.
+- Capture actual latitude and longitude only after permission is
+  granted.
+- Display the actual location on the existing Google Map.
+- Reuse existing geocoding if configured.
+- Allow manual address fallback if permission is denied or GPS is
+  unavailable.
+- Allow pin adjustment if supported by the existing map.
+- Save and reuse resident addresses.
+- Preserve historical pickup coordinates when a default address
+  changes.
+Never guess a location.
+5. Recycling Guide
+Replace the endless mobile scroll with a compact category directory
+using existing card/list styles.
+
+Categories may include plastics, PET bottles, metals, glass,
+paper/cardboard, e-waste and organic waste.
+
+Each category opens a focused detail view with: - Accepted materials. -
+Non-accepted materials. - Preparation instructions. - Important
+warnings. - Existing verified Green Coins rate, if available. - Book
+Pickup action preselecting that category.
+
+Preserve back navigation and search state. Do not add long generic
+educational copy.
+6. Institution workspace
+Keep the workspace name Institution.
+
+Reuse existing navigation and move institution sections into the
+existing sidebar where appropriate: - Overview - Users - Collectors -
+Collections - Materials - Partners - Rewards - Payouts - Transactions -
+Activity - Settings
+
+Do not create empty placeholder pages just to populate the menu.
+
+Improve the overview with operational summaries and charts only when
+real backend data is available. Otherwise show a concise
+empty/unavailable state.
+7. Institution specialisations
+Provide an interface for organisations to declare material
+specialisations, including plastics, PET, HDPE, metals, aluminium cans,
+glass, paper, cardboard, e-waste and organic waste.
+
+Allow multiple specialisations and multiple institutions with the same
+specialisation. Do not hardcode five institutions.
+
+Show Pending, Approved, Rejected and Suspended states accurately.
+8. Collector membership and tracking
+Provide interfaces for: - Collector membership requests and
+invitations. - Institution approval and removal/suspension. - Collector
+profile and activity. - Start Shift and End Shift. - On Duty, On Pickup
+and Offline states. - Material permissions inherited from institution
+approval.
+
+Use only real, authorised and sufficiently recent location updates.
+Display the last update time. If unavailable or stale, say so. Residents
+may see only their assigned collector. Institutions may see only
+collectors they are authorised to manage.
+
+Do not simulate tracking or claim reliable browser background tracking
+while a browser is suspended.
+9. Admin workspace
+Extend the existing admin experience only as required for: - Institution
+verification. - Material specialisation approvals. - Collector
+membership management. - Service areas and capacity. - Routing
+configuration. - Unmatched pickups. - Disputes. - Material rates and
+rewards. - Audit activity.
+
+Keep the current visual style. No decorative metrics or filler sections.
+10. Stage 1 quality gate
+Before backend work: - Check affected routes and navigation. - Check
+scanner upload and preview. - Check booking wizard state preservation. -
+Check existing Google Maps has not been replaced. - Check responsive
+layouts. - Check no fake data or locations were introduced. - Run
+available type checks and build checks. - Fix frontend regressions.
+
+Then proceed to Stage 2.
+STAGE 2 --- BUILD A NEW FIREBASE BACKEND
+11. Replace old Lovable/Supabase dependencies deliberately
+The current app contains Lovable/Supabase-related environment variables
+and integrations. I do not have the original Lovable secrets available.
+
+Do not ask me to guess or fabricate: - LOVABLE_API_KEY -
+LOVABLE_CRON_SECRET - LOVABLE_DB_MIGRATION_UI -
+SUPABASE_SERVICE_ROLE_KEY - Old Supabase connection credentials
+
+Instead, migrate the application to a new backend using the Firebase
+integration supported by Google AI Studio.
+
+Use: - Firebase Authentication for user authentication. - Cloud
+Firestore for persistent application data. - Firebase Security
+Rules for client access control. - Server-side Node.js
+functions/routes for privileged operations and sensitive business
+logic. - Google AI Studio's server-side Gemini integration for image
+analysis, using the server-side secret configured by AI Studio. -
+Existing Google Maps integration and API key, if available, for maps and
+geocoding.
+
+Use the Google AI Studio Firebase setup flow. If a Firebase setup card
+appears, ask to enable Firebase and select a suitable project and
+database region. Do not create an alternative database in parallel.
+
+Important: - The Firebase project is a new backend. Existing Supabase
+users and records do not automatically migrate. - Do not silently
+pretend old accounts or data have transferred. - Design a safe
+migration/import path if existing records need to be retained. - Do not
+delete or overwrite old data. - If a Firebase setup step requires my
+confirmation, stop only at that exact step and tell me what to select.
+12. Authentication and roles
+Implement secure authentication and role-aware access for: - Resident -
+Business - Collector - Institution - Hub - Processor - Administrator
+
+Preserve the current role-based user experience.
+
+Do not allow users to grant themselves privileged roles. Role changes
+and privileged approvals must be performed through trusted server-side
+operations.
+
+Support account creation, login, logout, session persistence, password
+reset where configured, and clear authentication errors.
+13. Firestore data model
+Design a clear, indexed, maintainable data model for: - users/profiles -
+role requests - institutions - institution memberships - material
+categories - institution material permissions and approvals - service
+areas and capacity - collector profiles and shifts - saved resident
+locations - scans and scan history - parent pickup bookings - separate
+pickup material streams - pickup status history - routing attempts and
+assignment history - collections and actual recorded weights -
+collection evidence and mismatch reports - hubs and batches - processor
+verifications - wallets - rewards - redemptions - transactions -
+notifications - audit logs - collector location updates
+
+Use server timestamps, document ownership, appropriate indexes and data
+validation. Avoid storing large image binaries directly in Firestore;
+use an appropriate secure object-storage service if configured. Do not
+add a second backend product without explaining why it is required.
+14. AI scanner backend
+Implement a server-side image-analysis endpoint using the Gemini
+integration available in Google AI Studio.
+- Validate image type and size.
+- Analyse the actual uploaded image.
+- Return structured material categories, counts where reasonably
+  visible, confidence where supported, and concise explanations.
+- Support mixed-material detection.
+- Save scan history securely.
+- Allow confirmed categories to populate booking.
+Do not expose Gemini secrets to browser code. Do not fabricate results
+when analysis fails. AI must not decide final accepted weight,
+institution authorisation or Green Coins.
+15. Institution approval and material permissions
+Implement server-side workflows for institution registration,
+verification and material specialisation approval.
+
+An institution may receive a pickup only if it is active and approved
+for the exact material. Support multiple institutions with overlapping
+specialisations.
+
+Pending, rejected or suspended permissions must not qualify.
+16. Collector membership and inherited permissions
+Implement invitations, membership requests, approvals, suspension and
+removal.
+
+Collector permissions derive from the institution's approved
+specialisations plus any explicit collector restrictions. Collectors
+cannot grant themselves permissions.
+
+If an institution's material permission is suspended, its collectors
+must immediately lose the ability to receive or process that material.
+17. Specialisation-based routing engine
+For every material stream, only consider institutions satisfying all
+conditions: 1. Verified and active. 2. Approved for the exact material.
+3. Service area covers the pickup. 4. Accepting requests. 5. Has
+sufficient capacity. 6. Has an eligible available collector.
+
+Material compatibility is a hard gate, never a ranking preference.
+
+Rank eligible institutions using proximity, available collectors,
+workload, capacity and fair distribution.
+
+If an institution declines or times out, record the attempt and try the
+next eligible institution. Prevent duplicate simultaneous assignment.
+
+If none qualifies, leave the request unmatched, notify the resident and
+make it available to authorised administrators. Never route to an
+incompatible institution.
+
+Select the institution first, then an eligible collector belonging to
+it.
+18. Mandatory waste separation and multiple streams
+If AI detects mixed materials, explain that residents must physically
+separate materials into different bags or containers before normal
+specialised booking.
+
+A parent booking may contain separate material streams. Each stream must
+have its own category, institution routing, collector assignment,
+inspection, verification and reward calculation.
+
+A checkbox alone must not override the separation requirement.
+
+If a collector finds a mismatch, support an evidence-backed correction
+or rejection. Rejected material must not receive successful collection
+status or final rewards.
+19. Secure QR collection verification
+Preserve the existing camera QR scanner and typed-code fallback.
+
+Server-side checks must verify: - Code authenticity. - Pickup is active
+and in a valid state. - Pickup is not cancelled or completed. -
+Authenticated collector is the assigned collector. - Collector belongs
+to the assigned institution. - Institution has approval for the exact
+material. - Collector has permission for the material. - Collection has
+not already been recorded.
+
+Reject wrong-material, wrong-institution, unassigned and duplicate
+scans. Do not record successful weight, receipt, completion or rewards
+after rejection.
+20. Collector GPS tracking
+Implement: - Start Shift and End Shift. - Actual location updates and
+timestamps. - Collector availability. - Last-update and stale-location
+status. - Institution access only to its authorised collectors. -
+Resident access only to the collector assigned to their pickup. - Stop
+sharing when shift/assignment ends as appropriate.
+
+Do not implement 24/7 tracking. Do not claim reliable background
+tracking in a suspended browser. Keep the architecture extensible for a
+future native mobile app.
+21. Green Coins and processor verification
+Preserve the pending-to-verified lifecycle.
+- AI estimates do not award final coins.
+- Resident-declared quantities do not establish weight.
+- Collector records actual weight.
+- Processor verifies accepted weight.
+- Only processor-verified accepted weight can settle final rewards.
+- Rejected material earns no final coins.
+- Prevent duplicate rewards.
+- Record every transaction.
+- Never trust frontend wallet balances or reward amounts.
+All sensitive reward settlement must be performed server-side and be
+atomic/idempotent.
+22. Security
+Implement and test: - Firestore Security Rules. - Server-side role
+checks. - Institution membership checks. - Material permission checks. -
+Assignment validation. - Location privacy. - Atomic assignment and
+reward operations. - Duplicate booking/collection prevention. -
+Transaction integrity. - Audit logs. - Input validation and rate limits
+where appropriate.
+
+Never expose service account credentials or privileged secrets in
+browser code. Review generated Firebase rules; do not leave permissive
+development rules in production.
+STAGE 3 --- PERFORMANCE OPTIMISATION
+Performance is a required deliverable, not an optional visual polish
+task.
+
+The current app feels slow when navigating. Diagnose the actual cause
+before changing code. Do not assume changing hosting alone will solve
+it.
+23. Measure first
+Use available browser/devtools and build measurements to identify: -
+Slow route transitions. - Repeated or duplicate API/database requests. -
+Large JavaScript bundles. - Heavy images/assets. - Components rendering
+unnecessarily. - Long blocking operations. - Slow backend endpoints. -
+Unnecessary full-page reloads. - Uncached repeated data. - Cold-start or
+network delays where measurable.
+
+Record baseline observations before optimisation.
+24. Optimise navigation and data loading
+Implement only appropriate changes supported by the current
+architecture: - Use client-side routing; avoid full-page reloads for
+internal navigation. - Lazy-load routes and heavy components. - Split
+large bundles where useful. - Avoid loading dashboard data that is not
+needed for the current screen. - Fetch only required Firestore documents
+and fields. - Avoid duplicate requests. - Cache reusable, non-sensitive
+data with sensible invalidation. - Keep user/session data fresh and
+secure. - Use pagination for long lists. - Optimise images and defer
+off-screen assets. - Avoid expensive computations during every render. -
+Prevent unnecessary React re-renders. - Use loading indicators only
+where a real request is pending. - Preserve existing page layout while
+improving responsiveness.
+
+Do not cache private or financial data in a way that leaks it across
+accounts. Do not make data appear current when it is stale.
+25. Performance verification
+After changes: - Compare route navigation and loading behaviour with the
+baseline. - Check network requests for duplicates. - Check bundle/build
+output. - Verify that caching does not show another user's data. -
+Verify data refreshes after mutations. - Report measurable results where
+available. - Do not promise zero lag or claim improvement without
+evidence.
+
+Google AI Studio preview or Cloud Run hosting does not automatically
+guarantee faster navigation. Optimise the app and measure the deployed
+result.
+STAGE 4 --- END-TO-END TESTING
+Test real workflows, not just whether screens render.
+Scanner
+- Real device photo.
+- Real upload.
+- Preview and replace.
+- Actual Gemini response.
+- Multiple materials.
+- Failure handling.
+- Scan history.
+- Transfer to booking.
+Booking and location
+- Four-step wizard.
+- Back navigation preserves state.
+- Actual GPS permission and coordinates.
+- Existing map loads with real key.
+- Manual fallback.
+- Saved location.
+- Historical pickup location preserved.
+- Duplicate booking prevented.
+Guide
+- Category directory.
+- Search.
+- Detail navigation.
+- Back navigation.
+- Category preselected in booking.
+Routing
+- Multiple institutions with the same specialisation.
+- Exclude unverified institutions.
+- Exclude wrong-material institutions.
+- Exclude out-of-area institutions.
+- Exclude full/inactive institutions.
+- Assignment fallback.
+- Unmatched queue.
+Collector and QR
+- Membership approval.
+- Permission inheritance.
+- Wrong material rejected.
+- Wrong institution rejected.
+- Unassigned collector rejected.
+- Duplicate scan rejected.
+- Shift and location privacy checks.
+Green Coins
+- Collector-recorded weight.
+- Processor verification.
+- Rejected weight earns no final coins.
+- Duplicate rewards prevented.
+Quality
+Run available TypeScript checks, lint, automated tests and production
+build. Fix regressions. Report only tests actually executed and their
+real results.
+FINAL REPORT --- HONEST STATUS ONLY
+Provide three concise sections:
+Working
+List only features that were implemented, connected and verified.
+Not working / not implemented
+For each item, state: - Feature. - Exact failure or missing
+dependency. - Whether it is frontend, backend, Firebase configuration,
+Google Maps key, permissions or external service.
+My required actions
+List only actions genuinely requiring me, such as enabling Firebase,
+selecting a database region, supplying a Google Maps API key or
+configuring an authentication provider.
+
+Do not ask me for old Lovable secrets if you have replaced those
+dependencies with Firebase.
+FINAL DIRECTIVE
+Continue the exact loop-and-lift-rewards project imported from my GitHub repository. Make changes to the imported project files in place and preserve its existing Git-based project structure.
+
+Preserve the current frontend, current typography, current layout and
+existing Google Maps implementation.
+
+Complete the frontend first. Build the new Firebase backend second.
+Optimise and measure navigation performance. Test real workflows.
+
+No random typography. No unnecessary text. No filler sections. No fake
+maps. No fake locations. No fake analytics. No fake AI results. No
+pretend functionality.
+
+If a feature does not work, say so clearly instead of displaying it as
+if it does.
+
+The result must be a working, secure, responsive and measurably
+optimised continuation of Remake --- not a newly imagined redesign.
